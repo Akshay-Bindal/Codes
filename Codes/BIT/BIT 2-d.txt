@@ -1,0 +1,52 @@
+#include <string.h>
+
+
+#include <stdio.h>
+
+
+long lowbit ( long x )
+
+
+{
+    return x & ( x ^ ( x - 1 ) );
+}
+
+
+void insert ( long x, long y, long a ) 
+
+
+{
+    long i, j;
+    i = x;
+    j = y;
+    while ( i <= maxn )
+    {
+        j = y;
+        while ( j <= maxn )
+        {
+            c[i][j] += a;
+            j += lowbit ( j );
+        }
+        i += lowbit ( i );
+    }
+}
+
+
+long sum ( long x, long y )         
+
+
+{
+    long re = 0;
+    long i = x, j = y;
+    while ( i > 0 )
+    {
+        j = y;
+        while ( j > 0 )
+        {
+            re += c[i][j];
+            j -= lowbit ( j );
+        }
+        i -= lowbit ( i );
+    }
+    return re;
+}

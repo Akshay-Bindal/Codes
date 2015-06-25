@@ -1,0 +1,56 @@
+#include<cstdio>
+#include<cstring>
+#include<cmath>
+#include<cstdlib>
+//containers
+#include<vector>
+#include<list>
+#include<map>
+#include<queue>
+#include<deque>
+#include<set>
+#include<string>
+#include<stack>
+#include<bitset>
+//IOs
+#include<iostream>
+//algorithm & miscellaneous
+#include<algorithm>
+#include<utility>
+#include<limits>
+#include<locale>
+
+using namespace std;
+
+#define swap(x,y) x=x+y-(y=x)
+#define mod 1000000007
+#define ll long long
+#define ull unsigned long long
+#define s(a) scanf("%d",&a)
+#define p(a) printf("%d",a)
+#define ss(a) scanf("%s",a)
+#define ps(a) printf("%s",a)
+#define pc(a) printf("%c",a)
+#define nline printf("\n")
+#define ff first
+#define rep(i,a,b) for(i=a;i<b;i++)
+#define reprev(i,a,b) for(i=a;i>b;i--)
+#define mk(x,y) make_pair(x,y)
+
+int main()
+{
+	//freopen("input.txt","r",stdin);
+	//freopen("output.txt","w",stdout);
+	int ans,arr[10005],t,i,n;
+	s(t);
+	while(t--)
+	{
+		s(n);
+		int flag = 0;
+		rep(i,0,n)
+		s(arr[i]);
+		
+		sort(arr,arr+n,greater<int>());	//To sort array in decending order
+	}
+return 0;
+}

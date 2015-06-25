@@ -1,0 +1,112 @@
+//Code 1:
+
+#include <algorithm>
+#include <bitset>
+#include <cctype>
+#include <cmath>
+#include <cstdio>
+#include <cstring>
+#include <iostream>
+#include <map>
+#include <queue>
+#include <set>
+#include <stack>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+#define fr(i,a,b) for (int i = (a), _b = (b); i <= _b; i++)
+#define frr(i,a,b) for (int i = (a), _b = (b); i >= _b; i--)
+#define rep(i,n) for (int i = 0, _n = (n); i < _n; i++)
+#define repr(i,n) for (int i = (n) - 1; i >= 0; i--)
+#define foreach(it, ar) for ( typeof(ar.begin()) it = ar.begin(); it != ar.end(); it++ )
+#define fill(ar, val) memset(ar, val, sizeof(ar))
+
+#define uint64 unsigned long long
+#define int64 long long
+#define all(ar) ar.begin(), ar.end()
+#define pb push_back
+#define mp make_pair
+#define ff first
+#define ss second
+
+#define BIT(n) (1<<(n))
+#define sqr(x) ((x) * (x))
+
+typedef pair<int, int> ii;
+typedef pair<int, ii> iii;
+typedef vector<ii> vii;
+typedef vector<int> vi;
+
+#define PI 3.1415926535897932385
+#define INF 1000111222
+#define eps 1e-7
+#define maxN 100111
+
+int n, tree[maxN];
+
+int get(int i) {
+	int res = 0;
+	while (i > 0) {
+		res = max(res, tree[i]);
+		i -= (-i & i);
+	}
+	return res;
+}
+
+void update(int i, int val) {
+	while (i <= n) {
+		tree[i] = max(tree[i], val);
+		i += (-i & i);
+	}
+}
+
+int main() {
+	#ifndef ONLINE_JUDGE
+		freopen("test.inp", "r", stdin);
+		//freopen("test.out", "w", stdout);
+	#endif
+	int val;
+	scanf("%d", &n);
+	fill(tree, 0);
+	rep(i, n) 
+	{
+		scanf("%d", &val);
+		int maxi = get(val);
+		update(val, maxi + 1);
+		//printf("%d %d\n", val, maxi + 1);
+	}
+	printf("%d\n", get(n));
+	return 0;
+}
+
+
+// Code 2:
+
+
+#include<cstdio>
+#include<cstdlib>
+#include<cstring>
+#include<algorithm>
+using namespace std;
+int f[120000],v,ans,x,i,n,j;
+int main(){
+	scanf("%d",&n);
+	for(i=1;i<=n;++i)
+	{
+		scanf("%d",&x);
+		v=0;
+		
+		for(j=x;j;j-=j&(-j))
+		v=max(v,f[j]);
+		
+		v++;
+		
+		ans=max(ans,v);
+		
+		for(j=x;j<=n;j+=j&(-j))
+		f[j]=max(f[j],v);
+	}
+	printf("%d\n",ans);
+}

@@ -1,0 +1,194 @@
+#include <cstdio>
+using namespace std;
+ 
+typedef long long ll;
+ 
+const int Maxd = 2;
+const int mod = 1000000007;
+ 
+struct matrix {
+	int m[Maxd][Maxd];
+	matrix(int diag = 0) {
+		for (int i = 0; i < Maxd; i++)
+			for (int j = 0; j < Maxd; j++)
+				m[i][j] = (i == j) * diag;
+	}
+	matrix operator *(const matrix &b) const {
+		matrix c;
+		for (int i = 0; i < Maxd; i++)
+			for (int j = 0; j < Maxd; j++)
+				for (int k = 0; k < Maxd; k++)
+					c.m[i][j] = (c.m[i][j] + ll(m[i][k]) * b.m[k][j] % mod) % mod;
+		return c;
+	}
+};
+ 
+int t;
+ll n;
+ 
+int main()
+{
+	scanf("%d", &t);
+	while (t--) {
+		scanf("%lld", &n); n--;
+		matrix r(1), a;
+		a.m[0][0] = 1; a.m[0][1] = 1;
+		a.m[1][0] = 1; a.m[1][1] = 0;
+		while (n) {
+			if (n & 1ll) r = r * a;
+			n >>= 1ll; a = a * a;
+		}
+		printf("%d\n", (r.m[0][0] + r.m[0][1]) % mod);
+	}
+	return 0;
+} 
+
+//
+
+//
+
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <deque>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include<string.h>
+#define tr(c,it) for(typeof(c.begin()) it=c.begin();it!=c.end();++it)
+#define all(c) c.begin(),c.end()
+#define mod 1000000007
+#define itor(c) typeof(c.begin())
+#define ll long long
+#define vi vector<int>
+#define vs vector<string>
+#define si set<int>
+#define msi multiset<int>
+#define ii pair<int,int>
+#define sii set<ii>
+#define vii vector<ii>
+#define vvi vector<vi>
+#define pb push_back
+#define mp make_pair
+ 
+using namespace std;
+ 
+ 
+long long fibonacci(ll n)
+{
+    long long fib[2][2]= {{1,1},{1,0}},ret[2][2]= {{1,0},{0,1}},tmp[2][2]= {{0,0},{0,0}};
+    int i,j,k;
+    while(n)
+    {
+        if(n&1)
+        {
+            memset(tmp,0,sizeof tmp);
+            for(i=0; i<2; i++) for(j=0; j<2; j++) for(k=0; k<2; k++)
+                        tmp[i][j]=(tmp[i][j]+ret[i][k]*fib[k][j]);
+            for(i=0; i<2; i++) for(j=0; j<2; j++) ret[i][j]=tmp[i][j]%mod;
+        }
+        memset(tmp,0,sizeof tmp);
+        for(i=0; i<2; i++) for(j=0; j<2; j++) for(k=0; k<2; k++)
+                    tmp[i][j]=(tmp[i][j]+fib[i][k]*fib[k][j]);
+        for(i=0; i<2; i++) for(j=0; j<2; j++) fib[i][j]=tmp[i][j]%mod;
+        n/=2;
+    }
+    return (ret[0][1]);
+}
+ 
+int main()
+{
+    ios::sync_with_stdio(false);
+    //freopen("input.txt","r",stdin);
+    //freopen("input.txt","w",stdout);
+    ll t=0,i=0,j=0,n=0,m,k=0,num=0,temp=0,ans;
+    cin>>t;
+    string str;
+    for(i=0;i<t;++i)
+    {
+        cin>>n;
+        cout<<fibonacci(n+1)<<endl;
+    }
+	return 0;
+}
+
+//
+
+//
+
+#include <cstdio>
+#include <cstring>
+ 
+using namespace std;
+ 
+long long MOD;
+ 
+struct Matrix{
+    long long X[2][2];
+ 
+    Matrix(){}
+ 
+    void init(){
+        memset(X,0,sizeof(X));
+        for(int i = 0;i < 2;++i) X[i][i] = 1;
+    }
+}aux;
+ 
+void mult(Matrix &m, Matrix &m1, Matrix &m2){
+    memset(m.X,0,sizeof(m.X));
+ 
+    for(int i = 0;i < 2;++i)
+        for(int j = 0;j < 2;++j)
+            for(int k = 0;k < 2;++k)
+                m.X[i][k] = (m.X[i][k] + m1.X[i][j] * m2.X[j][k]) % MOD;
+}
+ 
+Matrix pow(Matrix &M0, long long n){
+	Matrix ret;
+	ret.init();
+ 
+	if(n == 0) return ret;
+	if(n == 1) return M0;
+ 
+	Matrix P = M0;
+ 
+	while(n != 0){
+	    if(n & 1){
+	        aux = ret;
+	        mult(ret,aux,P);
+	    }
+ 
+	    n >>= 1;
+ 
+	    aux = P;
+	    mult(P,aux,aux);
+	}
+ 
+    return ret;
+}
+ 
+int main(){
+    Matrix M0;
+    M0.X[0][0] = M0.X[0][1] = M0.X[1][0] = 1;
+    M0.X[1][1] = 0;
+ 
+    long long n,m;
+ 
+    while(scanf("%lld",&n) == 1){
+        MOD = 1000000007;
+        printf("%lld\n",pow(M0,n).X[0][1]);
+    }
+ 
+    return 0;
+}

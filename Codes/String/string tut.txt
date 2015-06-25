@@ -1,0 +1,71 @@
+#include<cstdio>
+#include<cstring>
+#include<cmath>
+#include<cstdlib>
+//containers
+#include<vector>
+#include<list>
+#include<map>
+#include<queue>
+#include<deque>
+#include<set>
+#include<string>
+#include<stack>
+#include<bitset>
+//IOs
+#include<iostream>
+//algorithm & miscellaneous
+#include<algorithm>
+#include<utility>
+#include<limits>
+#include<locale>
+
+using namespace std;
+
+#define swap(x,y) x=x+y-(y=x)
+#define mod 1000000007
+#define ll long long
+#define ull unsigned long long
+#define s(a) scanf("%d",&a)
+#define p(a) printf("%d",a)
+#define ss(a) scanf("%s",a)
+#define ps(a) printf("%s",a)
+#define pc(a) printf("%c",a)
+#define nline printf("\n")
+#define ff first
+#define rep(i,a,b) for(i=a;i<b;i++)
+#define reprev(i,a,b) for(i=a;i>b;i--)
+#define mk(x,y) make_pair(x,y)
+
+int main()
+{
+	//freopen("input.txt","r",stdin);
+	//freopen("output.txt","w",stdout);
+	
+	int i=0;
+	string str;
+	cin>>str;
+	//cout<<str<<endl;
+	
+	int len = str.length();
+		while(str[i]!='.')
+		i++;
+		string inte = str.substr(0,i);	
+		string deci = str.substr(i+1,len);	//to copy string from i to len
+	//cout<<inte<<endl<<deci<<endl;
+	
+	if(inte[i-1]=='9')
+	printf("GOTO Vasilisa.");
+	
+	else if(deci[0]>='5')
+	{
+		int num=inte[i-1]-'0';	//to convert string to int
+		num++;
+		inte[i-1]=num+'0';	//to convert int to string back
+		cout<<inte;
+	}
+	
+	else
+	cout<<inte;
+return 0;
+}

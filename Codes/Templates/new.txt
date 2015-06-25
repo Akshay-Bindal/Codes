@@ -1,0 +1,64 @@
+#include<cstdio>
+#include<cmath>
+#include<ctime>
+#include<cctype>
+#include<cassert>
+#include<cerrno>
+#include<cfloat>
+#include<clocale>
+#include<csetjmp>
+#include<csignal>
+#include<cstdarg>
+#include<cstddef>
+#include<cstdlib>
+#include<cstring>
+
+//containers
+#include<vector>
+#include<list>
+#include<map>
+#include<queue>
+#include<deque>
+#include<set>
+#include<complex>
+#include<string>
+#include<stack>
+#include<bitset>
+
+//IOs
+#include<iostream>
+#include<sstream>
+#include<fstream>
+#include<iterator>
+
+//algorithm & miscellaneous
+#include<algorithm>
+#include<functional>
+#include<numeric>
+#include<utility>
+#include<memory>
+
+using namespace std;
+
+#define swap(x,y) x=x+y-(y=x)
+#define mod 1000000007
+#define ll long long
+#define ull unsigned long long
+#define s(a) scanf("%d",&a)
+#define p(a) printf("%d",a)
+#define ss(a) scanf("%s",a)
+#define ps(a) printf("%s",a)
+#define pc(a) printf("%c",a)
+#define nline printf("\n")
+#define ff first
+#define FOR(i,a,b) for(i=a;i<b;i++)
+#define MAX(a,b) (a<b?b:a)
+#define MIN(a,b) (a<b?a:b)
+
+int main()
+{
+	//freopen("input.txt","r",stdin);
+	//freopen("output.txt","w",stdout);
+
+return 0;    
+}

@@ -1,0 +1,11 @@
+#include <stdio.h>
+int main()
+{
+    char string[40];
+    printf("Enter whole sentece (yeah, bring spaces too, I can handle it):\n");
+    
+	scanf ("%[^\n\t]%*c", string);   //will skip all tabs and spaces
+    printf ("You entered: %s", string);
+    
+	return 0;
+}

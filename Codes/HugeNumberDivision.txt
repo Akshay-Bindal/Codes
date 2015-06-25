@@ -1,0 +1,110 @@
+#include <cstdlib>
+#include <cstring>
+#include <cassert>
+#include <climits>
+#include <cstdio>
+#include <cctype>
+#include <cfloat>
+#include <ctime>
+
+#include <algorithm>
+#include <iostream>
+#include <utility>
+#include <iomanip>
+#include <sstream>
+#include <fstream>
+#include <numeric>
+#include <complex>
+#include <vector>
+#include <string>
+#include <queue>
+#include <stack>
+#include <list>
+#include <map>
+#include <set>
+#include <map>
+
+
+#define forab(i,a,b) for( __typeof (a) i = a ; i <= b ; i++ )
+#define forba(i,a,b) for( __typeof (a) i = a ; i >= b ; i-- )
+#define rep(i,n) forab(i,0,n-1)
+#define repr(i,n) forba(i,n-1,0)
+#define forstl(i, s) for ( __typeof ((s).end ()) i = (s).begin (); i != (s).end (); i++ )
+
+#define memo(a,b)       memset (a,b,sizeof(a))
+#define all(a)          a.begin () , a. end ()
+#define clr(a)          a.clear ()
+#define sz(a)           a.size()
+#define sf              scanf
+#define pf              printf
+#define si(a)           scanf("%d",&a)
+#define pb              push_back
+#define MP              make_pair
+#define nl              puts("")
+#define ll             long long
+#define vi              vector < int >
+#define vii		vector < int , int >
+#define vll             vector < ll >
+#define pii             pair < int , int >
+
+#define rd              freopen ( "input.txt" , "r" , stdin )
+#define wr              freopen ( "output.txt" , "w" , stdout )
+
+using namespace std ;
+
+
+#define MAX 10000
+
+long rem;
+string dividend,quotient;
+    
+string division(long divisor)
+{
+    string quotient;
+    long temp=0;
+    int i=0,j=0;
+
+    while(dividend[i]){
+        
+         temp = temp*10 + (dividend[i] -48);
+         if(temp<divisor){
+            
+             quotient.pb(48);
+            
+         }
+         else{
+             quotient.pb((temp / divisor) + 48);
+             temp = temp % divisor;
+
+         }
+         i++;
+    }
+
+    rem = temp;
+    return quotient;
+}
+
+int main(){
+
+    long int divisor;
+
+    printf("Enter dividend: ");
+    cin>>dividend;
+    printf("Enter divisor: ");
+    scanf("%ld",&divisor);
+    
+	quotient.resize(1000006);
+    quotient = division(divisor);
+	int i=0;
+    while(quotient[i])
+         if(quotient[i]==48)
+             i++;
+         else
+             break;
+
+    //printf("Quotient: %s / %ld  =  %s",dividend,divisor,quotient);
+    
+    cout<<"Quotient: "<<dividend<<" "<<divisor<<" "<<quotient;
+    printf ("\nRemainder: %ld",rem);
+    return 0;
+}

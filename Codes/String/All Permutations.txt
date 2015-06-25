@@ -1,0 +1,20 @@
+#include<stdio.h>
+#include<string.h>
+char s[10],tmp[10];int l,visited[10],z=1;
+void per(int c)
+{   int i;
+	if(c==l-1)printf("%d: %s\n",z++,tmp);
+    for(i=0;i<l;i++)
+		if(!visited[i])
+		{	visited[i]=1;tmp[++c]=s[i];
+			per(c);
+			visited[i]=0; c--;
+		}
+}
+int main()
+{      
+	scanf("%s",s);
+	l=strlen(s);
+	per(-1);
+	return 0;
+}

@@ -1,0 +1,118 @@
+#include <cstdlib>
+#include <cstring>
+#include <cassert>
+#include <climits>
+#include <cstdio>
+#include <cctype>
+#include <cfloat>
+#include <ctime>
+ 
+#include <algorithm>
+#include <iostream>
+#include <utility>
+#include <iomanip>
+#include <sstream>
+#include <fstream>
+#include <numeric>
+#include <complex>
+#include <vector>
+#include <string>
+#include <queue>
+#include <stack>
+#include <list>
+#include <map>
+#include <set>
+#include <map>
+ 
+ 
+#define forab(i,a,b) for( __typeof (a) i = a ; i <= b ; i++ )
+#define forba(i,a,b) for( __typeof (a) i = a ; i >= b ; i-- )
+#define rep(i,n) forab(i,0,n-1)
+#define repr(i,n) forba(i,n-1,0)
+#define forstl(i, s) for ( __typeof ((s).end ()) i = (s).begin (); i != (s).end (); i++ )
+ 
+#define memo(a,b)       memset (a,b,sizeof(a))
+#define all(a)          a.begin () , a. end ()
+#define clr(a)          a.clear ()
+#define sz(a)           a.size()
+#define sf              scanf
+#define pf              printf
+#define si(a)           scanf("%d",&a)
+#define pb              push_back
+#define MP              make_pair
+#define nl              puts("")
+#define ll             long long
+#define vi              vector < int >
+#define vii		vector < int , int >
+#define vll             vector < ll >
+#define pii             pair < int , int >
+ 
+#define rd              freopen ( "input.txt" , "r" , stdin )
+#define wr              freopen ( "output.txt" , "w" , stdout )
+ 
+using namespace std ;
+#include <cstdio>
+#include <cstring>
+ 
+using namespace std;
+ 
+#define MAX_VAL 105
+ 
+ll N,T[MAX_VAL+1][MAX_VAL+1][MAX_VAL+1];
+ll arr[MAX_VAL+1][MAX_VAL+1][MAX_VAL+1];
+ 
+void update(int idx, int idy, int idz, ll val){
+    for(int x = idx;x<=MAX_VAL;x += (x & -x))
+        for(int y = idy;y<=MAX_VAL;y += (y & -y))
+            for(int z = idz;z<=MAX_VAL;z += (z & -z))
+                T[x][y][z] += val;
+}
+ 
+ll F(int idx, int idy, int idz){
+    ll sum = 0;
+ 
+    for(int x = idx;x>0;x -= (x & -x))
+        for(int y = idy;y>0;y -= (y & -y))
+            for(int z = idz;z>0;z -= (z & -z))
+                sum += T[x][y][z];
+ 
+    return sum;
+}
+ 
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+    	memo(T,0);
+    	memo(arr,0);
+		int M,x1,x2,y1,y2,z1,z2;
+		ll K;
+    	string s;
+    	cin>>N>>M;
+ 
+    	while(M--)
+    	{
+        	cin>>s;
+ 
+    	 	if(s[0]=='U')
+    	 	{
+            	cin>>x1>>y1>>z1>>K;
+            	++x1; ++y1; ++z1;
+            	ll tem=K-arr[x1][y1][z1];
+            	arr[x1][y1][z1]=K;
+            	update(x1,y1,z1,tem);
+        	}
+        	else
+        	{
+            	cin>>x1>>y1>>z1>>x2>>y2>>z2;
+            	++x1; ++y1; ++z1;
+            	++x2; ++y2; ++z2;
+            	printf("%lld\n",F(x2,y2,z2)-F(x2,y2,z1-1)-F(x2,y1-1,z2)-F(x1-1,y2,z2)
+                            +F(x1-1,y1-1,z2)+F(x1-1,y2,z1-1)+F(x2,y1-1,z1-1)-F(x1-1,y1-1,z1-1));
+        	} 
+    	}
+	}
+    return 0;
+}

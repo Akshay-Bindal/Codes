@@ -1,0 +1,77 @@
+#include <cstdio>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+typedef vector<int> VI;
+
+// the graph representation
+// as a list of adjacent vertexes for each vertex
+vector<VI> a;
+
+VI mark; // we mark visited vertexes here
+
+int cnt; // contains the size of the current connected component
+
+// traverse the graph in depth first order
+void dfs(int u) {
+	
+	mark[u] = 1; // mark vertex as visited
+	cout<<u<<" ";
+	// loop over adjacent vertexes
+	for (VI::iterator v = a[u].begin(); v != a[u].end(); ++v) {
+		
+		// *v is the adjacent vertex itself
+		if (!mark[*v]) {
+			
+			// if it was not visited before we move to it
+			dfs(*v);
+		}
+	}
+}
+
+int main() {
+	// input number of tests
+	int T;
+	scanf("%d", &T);
+	for (int t = 0; t < T; ++t) {
+		
+		// input number of vertexes and edges
+		int N, M;
+		scanf("%d%d", &N, &M);
+		
+		// initializing graph
+		a = vector<VI> (N);
+		
+		for (int i = 0; i < M; ++i) {
+			
+			// input ends of the current edge
+			int u, v;
+			scanf("%d%d", &u, &v);
+			
+			// adjust them to be in the range [0,n)
+			// since it is more convenient
+			--u; --v;
+			
+			// add v to the list of u, and u to the list of v
+			a[u].push_back(v);
+			a[v].push_back(u);
+		}		
+		
+		mark = VI(N, 0); // initially mark all vertexes as unvisited  
+		
+		// loop over vertexes
+		for (int u = 0; u < N; ++u) {
+			
+			// skip visited vertex
+			if(mark[u]) {
+				continue;
+			}
+			
+			dfs(u); // and calculate it through the dfs, marking visited vertexes
+			
+		}
+		cout<<endl;
+	}
+	return 0;
+}

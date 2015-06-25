@@ -1,0 +1,12 @@
+BIT can be used with 2 types of ques:
+1. when update is in a add a number in a range and query is quantity on an index
+2. when query is a sum of a range and update is add a number on an index.
+
+For 1st type :
+read(idx);
+update(l, +1);
+update(r, -1);
+
+For 2nd type :
+update(l, x);
+read(r)-read(l);

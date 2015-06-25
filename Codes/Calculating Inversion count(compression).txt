@@ -1,0 +1,111 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#include<vector>
+#include<set>
+#include<map>
+#include<functional>
+#include<string>
+#include<cstring>
+#include<cstdlib>
+#include<queue>
+#include<utility>
+#include<fstream>
+#include<sstream>
+#include<cmath>
+#include<cstdio>
+#include <ctime>
+#include<cassert>
+#include <pthread.h>
+
+
+using namespace std;
+
+#define MEM(a,b) memset(a,(b),sizeof(a))
+#define MAX(a,b) ((a) > (b) ? (a) : (b))
+#define MIN(a,b) ((a) < (b) ? (a) : (b))
+
+#define MP make_pair
+#define pb push_back
+
+
+#define maxn 100000
+#define maxt 100
+#define maxv 1000000000
+
+typedef long long  LL;
+typedef pair<int,int> pi;
+typedef vector<int> vi;
+
+typedef vector<pi> vpi;
+
+int tree[maxn+2];
+
+int read(int idx)
+{
+	int sum = 0;
+	while (idx > 0) sum =(sum+tree[idx]), idx -= (idx & -idx);
+	return sum;
+}
+
+void update(int idx ,int val)
+{
+	while (idx <= maxn) tree[idx]=(tree[idx]+val), idx += (idx & -idx);
+}
+
+int females[maxn+5];
+int males[maxn+5];
+int line[maxn+5];
+pi all[maxn+5];
+
+int main()
+{
+   int i,j,k,n,m,cs=0;
+
+     scanf("%d",&n);
+     assert(n>=1 && n<=maxn);
+     map<int,int> F,M;
+
+     for(i=0;i<n;i++)
+     {
+        int a,b;
+        scanf("%d%d",&a,&b);
+        females[i]=b;
+        males[i]=a;
+        all[i]=MP(a,b);
+     }
+
+     /* assigns each male and female an unique id between 1 and N */
+     sort(males,males+n);
+     sort(females,females+n);
+
+     for(i=0;i<n;i++)
+     {
+        M[males[i]]=i+1;
+        F[females[i]]=i+1;
+     }
+
+
+     for(i=0;i<n;i++)
+     {
+        int x=M[all[i].first],y=F[all[i].second];
+        line[x]=y;
+     }
+
+     /* traverse from right to left for males, and update the position of it's corresponding female
+         on a binary indexed tree */
+
+     MEM(tree,0);
+     LL ans=0;
+     for(i=n;i>=1;i--)
+     {
+        int x=line[i];
+        ans+=read(x);
+        update(x,+1);
+     }
+
+     printf("%lld\n",ans);
+
+
+	return 0;
+}
